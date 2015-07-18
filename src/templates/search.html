@@ -2,6 +2,9 @@
 {% include '_macros/more_button.html' %}
 
 {% macro results_subheader(query, count) %}
+  {% if query=="" %}
+    {% set query = "Everything" %}
+  {% endif %}
   <section class="main">
     <div class="subheader">
       <h1 class="search-results-header search-results-header-mobile">
@@ -11,7 +14,7 @@
       <h1 class="search-results-header search-results-header-desktop">
         {{ _plural('<b>"{search_query}"</b> returned {n} result',
                    '<b>"{search_query}"</b> returned {n} results',
-                   search_query=query|escape,
+                   search_query=query|safe,
                    n=count) }}
       </h1>
     </div>
